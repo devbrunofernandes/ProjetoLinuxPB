@@ -12,6 +12,6 @@ Objetivo: Implantar uma pagina web em maquina virtual Linux Ubuntu com sistema d
 
 2. -> [ Configuração do Servidor Web](SERVIDORWEB.md)
 
-3. -> [Monitoramento e Notificações]()
+3. -> [Monitoramento e Notificações](MONITORAMENTO.md)
 
-4. -> [Automação e Testes]()
+4. -> [Automação e Testes](TESTES.md)
