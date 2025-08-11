@@ -31,4 +31,4 @@ Além disso, abra o Telegram para conferir se o bot enviou corretamente a mensag
 
 ![Conversa com o bot](Imagens/Imagem11.PNG)
 
-Isso finaliza a etapa 4, Configuração do Servidor Web, e o projeto "**Infraestrutura Web com Monitoramento Automatizado**". Obrigado por ler até aqui.
+Isso finaliza a etapa 4, "**Testes e Documentação**", e o projeto "**Infraestrutura Web com Monitoramento Automatizado**". Obrigado por ler até aqui.

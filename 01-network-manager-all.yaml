@@ -1,0 +1,12 @@
+# Let NetworkManager manage all devices on this system
+network:
+  version: 2
+  renderer: NetworkManager
+  ethernets:
+    enp0s3:
+      dhcp4: no
+      addresses:
+        - 192.168.15.155/24 # defina um IP para o seu servidor
+      gateway4: [SEU GATEWAY DE INTERNET]
+      nameservers:
+        addresses: [8.8.8.8, 8.8.4.4]

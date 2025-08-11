@@ -6,9 +6,9 @@ Essa é a terceira etapa do projeto, o objetivo é criar um script para monitora
 
 Navegue até o diretório "**/var/log/**" com o comando "**cd**" e crie com "**touch**" o arquivo "**monitoramento.log**", nesse arquivo manteremos registro de paradas e inicializações do serviço.
 
-Crie um diretório para armazenar o script, nesse caso vou criar um diretório "**/var/script**" utilizando do comando "**mkdir /var/script**" (lembrando que a permissão de usuario root ainda é necessaria), com ele criado acesse usando o comando "**cd**", a criação do programa pode ser realizada com qualquer linguagem e ferramenta disponível, para esse propósito estarei usando "**python**" e "**shell script**". 
+Crie um diretório para armazenar o script, nesse caso vou criar um diretório "**/var/script**" utilizando do comando "**mkdir /var/script**" (lembrando que a permissão de usuario root ainda é necessaria), com ele criado acesse usando o comando "**cd**", a criação do programa pode ser realizada com qualquer linguagem e ferramenta disponível, para esse propósito estarei usando "**python**". 
 
-Digite o comando "**touch monitoramento.py**" e "**touch monitoramento.sh**" para gerar os arquivos em que será escrito o script.
+Digite o comando "**touch monitoramento.py**" para gerar o arquivo em que será escrito o script.
 
 ## Adquirindo bot do Telegram
 
@@ -28,27 +28,17 @@ Agora, para ler o código dessa conversa, é necessário enviar uma requisição
 
 ![JSON de resposta](Imagens/Imagem8.PNG)
 
-## Escrevendo o shell script
-
-Voltando à máquina virtual do servidor, usaremos "**python**" com as bibliotecas "**requests**", "**sys**" e "**datetime**". Esses itens normalmente já vem instalados no sistema operacional, mas caso não, é um requisito instalá-los primeiro.
-
-Abra com algum editor de texto o arquivo "**monitoramento.sh**" que guardamos na pasta "**/var/script**", na primeira linha digite #! /bin/bash para iniciar o arquivo, na segunda linha IP_DO_SERVIDOR=$(ip addr show dev enp0s3 | grep "inet " | awk '{print $2}' | cut -d/ -f1) para armazenar em uma variável do sistema de forma dinâmica o IP da placa de rede enp0s3, e por último na terceira linha python3 /var/script/monitoramento.py $IP_DO_SERVIDOR para executar o arquivo python passando como parâmetro a variável que foi declarada, após isso pode fechar o arquivo.
-
-[Clique para ver o script bash aqui.](monitoramento.sh)
-
-![Script monitoramento.sh](Imagens/Imagem9.PNG)
-
 ## Escrevendo python
 
-Agora abra com o editor de texto o arquivo "**monitoramento.py**", nas primeiras linhas do código, escreva as linhas de importações de bibliotecas, importando "sys", "datetime" e "requests".
+Agora abra com o editor de texto o arquivo "**monitoramento.py**", nas primeiras linhas do código, escreva as linhas de importações de bibliotecas, importando "datetime" e "requests".
 
-Iniciando com o código de fato, armazene em uma variável o argumento de entrada que o arquivo shell script envia juntamente com a execução do python. Como esse valor vai ser passado pelo script, não tem necessidade de validar entrada de usuário aqui. Use o método "**argv**" da biblioteca "**sys**" para acessar os argumentos, o IP é o segundo argumento, pois o primeiro é sempre o próprio nome do arquivo chamado.
+Iniciando com o código de fato, armazene em uma variável o endereço de IP estático que definimos anteriormente.
 
 No próximo passo, vamos carregar em memória a última linha do arquivo de log que criamos. Declare e inicialize uma variável que vai conter a última linha, abra o arquivo do log em modo de leitura e itere linha por linha até a última, registrando essa na variável.
 
 Continuando, abra um bloco try-except que tentará a conexão com a nossa página e lidará com a exceção. Dentro do bloco try, com "**requests.get(f"http://{maquina_ip}/")**", nós estaremos tentando a conexão com o nosso próprio IP para receber a página web. No caso de sucesso, verifique se a última linha do log não contém a palavra "ONLINE". Nesse caso, abra o arquivo do log em modo "append" e escreva uma linha nova para ser adicionada ao log indicando que o serviço está online e funcional. É recomendado adicionar a data e hora atual no registro do log, para isso se utiliza a biblioteca "**datetime**".
 
-Já no caso de fracasso da requisição HTTP, verifique se a última linha do log não contém a palavra "OFFLINE", nesse caso precisamos notificar o administrador via bot do telegram e escrever no log o novo estado do servidor que é indisponível ou offline, para isso envie uma requisição GET para o endpoint da API do Telegram, o endereço é "**https://api.telegram.org/bot[SEU TOKEN DE ACESSO DO BOT AQUI]/sendMessage? chat_id=[SEU ID DO CHAT AQUI]&text=[SUA MENSAGEM QUE O BOT ENVIARÁ]**", substituindo devidamente com as suas informações, isso deve enviar a mensagem via Telegram. Após isso, ainda é importante abrir o arquivo log em modo "append" e adicionar uma nova linha informando que o servidor está offline e novamente informando a data e hora com a biblioteca "**datetime**".
+Já no caso de fracasso da requisição HTTP, verifique se a última linha do log não contém a palavra "OFFLINE", nesse caso precisamos notificar o administrador via bot do telegram e escrever no log o novo estado do servidor que é indisponível ou offline, para isso envie uma requisição GET para o endpoint da API do Telegram, o endereço é "**https://api.telegram.org/bot[SEU TOKEN DE ACESSO DO BOT AQUI]/sendMessage?chat_id=[SEU ID DO CHAT AQUI]&text=[SUA MENSAGEM QUE O BOT ENVIARÁ]**", substituindo devidamente com as suas informações, isso deve enviar a mensagem via Telegram. Após isso, ainda é importante abrir o arquivo log em modo "append" e adicionar uma nova linha informando que o servidor está offline e novamente informando a data e hora com a biblioteca "**datetime**".
 
 [Clique para ver o script Python aqui.](monitoramento.py)
 
@@ -56,10 +46,12 @@ Já no caso de fracasso da requisição HTTP, verifique se a última linha do lo
 
 ## Programando a execução
 
-Nesse passo, vamos programar para que a execução do "**monitoramento.sh**" seja realizada automaticamente a cada 1 minuto, dessa forma a funcionalidade de monitoramento do servidor web estará pronta.
+Nesse passo, vamos programar para que a execução do "**monitoramento.py**" seja realizada automaticamente a cada 1 minuto, dessa forma a funcionalidade de monitoramento do servidor web estará pronta.
 
 Para criar uma tarefa sendo executada de tempos em tempos, digite o comando "**crontab -e**", ele dará as opções e pedirá para que você selecione o editor de texto que deseja usar, selecione o que se sentir mais confortável.
 
-Automaticamente será aberto o editor de texto escolhido com vários comentários explicando o funcionamento do comando, basicamente são seis valores de entrada que correspondem a [minuto] [hora] [dia do mês] [mês] [dia da semana] [comando que será executado]. Dessa forma, digite "* * * * * /var/script/monitoramento.sh", isso quer dizer que em qualquer minuto ele vai executar o arquivo de shell script.
+Automaticamente será aberto o editor de texto escolhido com vários comentários explicando o funcionamento do comando, basicamente são seis valores de entrada que correspondem a [minuto] [hora] [dia do mês] [mês] [dia da semana] [comando que será executado]. Dessa forma, digite "* * * * * /usr/bin/python3 /var/script/monitoramento.py", isso quer dizer que em qualquer minuto ele vai executar o arquivo de python.
 
-Isso finaliza a etapa 3, Monitoramento e Notificações. Para seguir, clique em [próximo](TESTES.md).
+Um último detalhe é tornar o arquivo python executável, use o comando "**chmod +x /var/script/monitoramento.py**".
+
+Isso finaliza a etapa 3, "**Monitoramento e Notificações**". Para seguir, clique em [próximo](TESTES.md).
