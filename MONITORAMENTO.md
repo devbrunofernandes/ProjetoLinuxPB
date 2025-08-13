@@ -16,7 +16,7 @@ Como o meio de notificações adotado foi o Telegram, antes de escrever o códig
 
 Conectado no aplicativo, pesquise na caixa de busca por "**BotFather**", aparecerá na primeira opção o bot oficial do Telegram com um selo, com ele é possível registrar e administrar bots.
 
-Inicie a conversa com ele, em seguida digite ou clique em "**/newbot**" para criar um novo bot, em seguida o BotFather irá pedir por algumas informações como o nome de exibição do seu bot e um nome de usuário dele, após isso ele retornará uma mensagem indicando que o seu bot foi criado com sucesso, juntamente a esta mensagem estará o token de acesso, você precisa guardar esse token de acesso.
+Inicie a conversa com ele, em seguida digite ou clique em "**/newbot**" para criar um novo bot, o BotFather irá pedir por algumas informações como o nome de exibição do seu bot e um nome de usuário dele, após isso ele retornará uma mensagem indicando que o seu bot foi criado com sucesso, juntamente a esta mensagem estará o token de acesso, você precisa guardar esse token de acesso.
 
 ![Criando bot no Telegram](Imagens/Imagem7.PNG)
 

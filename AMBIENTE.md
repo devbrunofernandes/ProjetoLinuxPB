@@ -19,7 +19,7 @@ Para baixar a imagem do Ubuntu, que será necessaria para a instalação do sist
 
 ## Criando a máquina virtual
 
-Com o Oracle VirtualBox aberto na tela inicial, clique no botão azul escrito "**Novo**" para criar uma nova máquina virtual. Então aparecerá uma nova janela com algumas abas e diversos campos para serem preenchidos, na aba de "**Nome e sistema operacional**" digite Ubuntu no campo nome e os outros serão preenchidos automaticamente. Após isso vá para a aba "**Hardware**" e selecione a quantidade de memória RAM e núcleos da CPU do seu computador que a máquina virtual terá acesso. Por último vá para a aba "**Disco Rígido**" onde você pode opcionalmente alterar o diretório local onde o VirtualBox usará como disco para a máquina virtual, caso não queira alterar pode deixer o padrão. Clique em "**Finalizar**".
+Com o Oracle VirtualBox aberto na tela inicial, clique no botão azul escrito "**Novo**" para criar uma nova máquina virtual. Então aparecerá uma nova janela com algumas abas e diversos campos para serem preenchidos, na aba de "**Nome e sistema operacional**" digite Ubuntu no campo nome e os outros serão preenchidos automaticamente. Após isso vá para a aba "**Hardware**" e selecione a quantidade de memória RAM e núcleos da CPU do seu computador que a máquina virtual terá acesso. Por último vá para a aba "**Disco Rígido**" onde você pode opcionalmente alterar o diretório local onde o VirtualBox usará como disco para a máquina virtual, caso não queira alterar pode deixar o padrão. Clique em "**Finalizar**".
 
 ![Tela de criacao maquina virtual](Imagens/Imagem2.PNG)
 

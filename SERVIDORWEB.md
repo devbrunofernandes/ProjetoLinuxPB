@@ -50,8 +50,6 @@ Clique para visualizar o conteúdo do [arquivo de configurações da rede](01-ne
 
 ## Automatizando reinicio do Nginx
 
-Para isso, vamos criar um serviço systemd para o Nginx, fazendo com que ele reinicie automaticamente sempre em caso de falha.
-
 Utilize o comando "**systemctl edit nginx.service**", esse comando criará um arquivo que adiciona configurações aos padrões do Nginx sem modificar os arquivos originais, ele também abrirá o editor de texto para modificar o arquivo que estará cheio de comentários, pode escrever as configurações logo após o primeiro bloco de comentários.
 
 O que deve ser escrito é, "**[Service]**" para indicar que se trata de configurações de serviço do processo, logo abaixo "**Restart=on-failure**" que indica para reiniciar o serviço em caso de falha (uma outra opção seria colocar "**Restart=always**" para ele sempre tentar reiniciar), e mais uma linha embaixo "**RestartSec=5s**" para dar tempo ao sistema reiniciar o processo sem gerar muitos pedidos para essa tarefa.
